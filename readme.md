@@ -1,5 +1,7 @@
 ## Download files from Azure Storage
 
+The only dependency is `azure-storage-blob`, install with `pip install requirements.txt`
+
 ### Instructions
 
 The script accepts three ways of providing filepaths to download, all three ways can be combined freely:
