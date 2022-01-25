@@ -115,7 +115,7 @@ class AzureDownloader:
         download_count = 0
 
         # paths that fail to download
-        fail_paths = []
+        fail_paths: List[Tuple[str, str]] = []
         # paths that were renamed
         renamed_paths: List[Tuple[str, str]] = []
 
@@ -134,7 +134,9 @@ class AzureDownloader:
 
                 if not default_container_name:
                     # get container name from path
-                    container_name = tpath.split('/')[0]
+                    container_name, *rest = tpath.split('/')
+                    tpath = os.path.join("", *rest).replace('\\', '/')
+
 
                 container_client = self.get_container_client(container_name)
 
@@ -142,11 +144,11 @@ class AzureDownloader:
                     # download file
                     stream = container_client.download_blob(tpath)
                 except ResourceNotFoundError:
-                    fail_paths.append(fpath)
+                    fail_paths.append((tpath, container_name))
                     print(f"WARN blob does not exist on container ({container_name}): '{tpath}'")
                     continue
                 except HttpResponseError as e:
-                    fail_paths.append(fpath)
+                    fail_paths.append((tpath, container_name))
                     print(f"WARN error when downloading blob on container ({container_name}) --\n\t{str(e)}: '{tpath}'")
                     continue
 
@@ -168,9 +170,9 @@ class AzureDownloader:
         log(f"Downloaded {download_count} file paths")
 
         if fail_paths:
-            log(f"Failed to download one more paths")
-            for p in fail_paths:
-                log(f"- '{p}'")
+            log(f"Failed to download one more paths - (container) path")
+            for p, c in fail_paths:
+                log(f"- ({c}) '{p}'")
 
         if renamed_paths:
             log(f"Renamed one or more files because the name already exists")
