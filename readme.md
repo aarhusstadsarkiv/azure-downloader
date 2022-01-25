@@ -1,5 +1,7 @@
 ## Download files from Azure Storage
 
+The only dependency is `azure-storage-blob`, install with `pip install requirements.txt`
+
 ### Instructions
 
 The script accepts three ways of providing filepaths to download, all three ways can be combined freely:
@@ -7,6 +9,8 @@ The script accepts three ways of providing filepaths to download, all three ways
 - `python download.py path/1.pdf path/2.pdf path/3.pdf`
 - `python download.py -p path/1.pdf -p path/2.pdf --path path/3.pdf`
 - `python download.py -f paths.csv` read a list of paths from a file, line delimitered
+
+The container to download from should be specified with `-c CONTAINER_NAME`, otherwise the first part from the given filepaths specifies the container: `[container]/path/.pdf`
 
 The script requires a key to connect to Azure Storage, this key is provided with `--key` or by setting it to the environment variable key `AZURE_STORAGE_CONNECTION_STRING` 
 
