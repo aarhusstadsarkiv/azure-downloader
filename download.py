@@ -20,7 +20,7 @@ parser.add_argument('-p', '--path', action='append', help='path on azure storage
 parser.add_argument('-o', '--output', default='download', help="output folder")
 parser.add_argument('-c', '--container', help="download from a specific container (container name will be taken from path if this is not supplied)")
 parser.add_argument('-f', '--file', help="file to parse paths to download from (txt, csv)")
-parser.add_argument('--key', help="connection key to access azure storage (see: https://docs.microsoft.com/en-us/azure/storage/blobs/storage-quickstart-blobs-python#copy-your-credentials-from-the-azure-portal)")
+parser.add_argument('--key', help="connection key to access azure storage (see: https://docs.microsoft.com/en-us/azure/storage/blobs/storage-quickstart-blobs-python#copy-your-credentials-from-the-azure-portal). Remember to quote the connection string.")
 parser.add_argument('--transform', action="store_true", help='transform and normalize file paths so they fit what Azure expects')
 parser.add_argument('--dry', action="store_true", help='perform a dry run where nothing is downloaded or created')
 parser.add_argument('--no-rename', action="store_true", help="don't rename the filename if it already exists in output folder (file will just be skipped)")
