@@ -38,6 +38,7 @@ options:
   --key KEY             connection key to access azure storage (see:
                         https://docs.microsoft.com/en-us/azure/storage/blobs/storage-quickstart-   
                         blobs-python#copy-your-credentials-from-the-azure-portal)
+                        Remember to quote the connection string.
   --transform           transform and normalize file paths so they fit what Azure expects
   --dry                 perform a dry run where nothing is downloaded or created
   --no-rename           don't rename the filename if it already exists in output folder (file      
